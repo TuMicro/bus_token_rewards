@@ -1,0 +1,23 @@
+## Compiled JavaScript files
+lib/
+# **/*.js
+# **/*.js.map
+
+node_modules/
+
+firebase-debug.log
+ui-debug.log
+
+input/
+
+export_*.csv
+
+.env
+.env.prod*
+.env.test*
+.env.def.prod
+.env.def.test
+
+# just to avoid pushing accidentally renamed files (happened when using Windows and Google Drive)
+env.prod*
+env.test*

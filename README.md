@@ -1,0 +1,1 @@
+Change dir to functions and follow the README.md file there
