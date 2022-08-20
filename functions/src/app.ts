@@ -2,10 +2,9 @@ import express from "express";
 import cors from "cors";
 import { isTesting } from "./util/devEnv";
 import { routerV1 } from "./server/router01";
-
+import { deliver_token_rewards } from "./tasks/deliver-token-rewards";
 
 const app = express();
-
 
 // common endpoints:
 
@@ -22,6 +21,13 @@ app.get("/isTestingEnv", async function (req, res) {
 
 app.get("/crashNotificationTester", async function (req, res) {
   throw new Error('crashNotificationTester');
+});
+
+app.get("/deliverBusTokenRewards", async function (req, res) {
+  await deliver_token_rewards();
+  res.json({
+    status: 'OK',
+  });
 });
 
 // dummy endpoint that just returns OK:

@@ -18,6 +18,15 @@ npm install
 
 [Josue] I have tested this repo with node 16.13.2, probably any version 16 or later will work.
 
+# Generate typings for abi files
+
+In case you add or modify .abi files, you need to run this command in order to generate the typings and use the abis (contracts) comfortably.
+
+```
+cd functions
+npx typechain --target=ethers-v5 --out-dir src/contract-types
+```
+
 # Development (local testing)
 
 In order to have access to other resources (like Firestore) while testing locally, install gcloud and then run:
@@ -68,7 +77,7 @@ npm run-script serve
 
 # Production Deployment to Cloud Functions
 
-First install firebase CLI utility in your machine and login. Download the `.env.prod` file from [here](https://drive.google.com/drive/folders/1_bSPY7ji4JiSTipQyy0sVQyc75L0Pyc3) and place it in the functions folder. (make sure IS_TESTING=false)
+First install firebase CLI utility in your machine and login. Download the `.env.prod` file from [here]() and place it in the functions folder. (make sure IS_TESTING=false)
 
 Then IN THE ROOT FOLDER run:
 
@@ -81,25 +90,22 @@ Now you can start deploying anything of the below:
 
 ```
 # deploy all functions (remember to set up the .env accordingly before deploying to production)
-firebase deploy --only functions:turuta_app_reports_listener && time /t
+firebase deploy --only functions:bus_token_rewards && time /t
 ```
 
-# Testing-environment Deployment to Cloud Functions
-
-First install firebase CLI utility in your machine and login. Download the `.env.test` file from [here](https://drive.google.com/drive/u/1/folders/1rNEj3qYcg14aCAY8auvC99GyKA3R8RPO) and place it in the functions folder.
-
-Then IN THE ROOT FOLDER run:
+Deploying the core function:
 
 ```
-firebase use test
-# more info: https://firebase.google.com/docs/functions/config-env#env-variables
-```
-
-Now you can start deploying anything of the below:
-
-```
-# testing functions (usually for frontend testing)
-firebase deploy --only functions:testing && time /t
+npm run build && gcloud functions deploy deliver-bus-token-rewards ^
+  --gen2 ^
+  --runtime nodejs16 ^
+  --entry-point cf_endpoints_2nd_gen ^
+  --source . ^
+  --region us-central1 ^
+  --trigger-http ^
+  --project=tumicro-1203 ^
+  --allow-unauthenticated ^
+  --timeout 3600s
 ```
 
 
