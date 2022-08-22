@@ -142,7 +142,8 @@ async function issue_chunk_of_tokens_for_user_id(chunk: RewardPerTicketWithId[],
           walletAddress);
         break;
       } catch (e) {
-        console.log(`error issuing tokens for user ${userId} with address ${walletAddress}`);
+        console.error(e);
+        console.log(`error issuing tokens for user ${userId} with address ${walletAddress}, attempt N ${n_retries}`);
       }
     }
     // storing the transaction id in Firestore for later analysis
