@@ -7,6 +7,7 @@
     "shell": "npm run build && firebase functions:shell",
     "watch": "mocha -w",
     "testSprintRally02": "mocha -g 'rally_02_sprint'",
+    "teste": "mocha -g 'Email'",
     "test": "mocha",
     "start": "npm run watch",
     "deploy": "firebase deploy --only functions",
